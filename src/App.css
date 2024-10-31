@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.component-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+  text-align: left;
+}
