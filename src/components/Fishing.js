@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 
 function Fishing() {
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetch("/.netlify/functions/fetchFishingData")
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        console.log(data); // Temporary logging
+        setData(data);
+      });
   }, []);
 
   return (
     <div>
       <h2>Fishing Data</h2>
-      {/* Use data in charts, tables, etc. */}
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{JSON.stringify(item)}</li>
+        ))}
+      </ul>
     </div>
   );
 }
