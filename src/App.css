@@ -1,17 +1,6 @@
-.App {
-  text-align: center;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.component-container {
-  border: 1px solid #ccc;
-  padding: 20px;
-  width: 300px;
-  text-align: left;
+.chart-container {
+  position: relative;
+  width: 90%; /* Limit the width to 90% of the container */
+  height: 500px; /* Set a fixed height */
+  margin: 0 auto; /* Center the chart horizontally */
 }
