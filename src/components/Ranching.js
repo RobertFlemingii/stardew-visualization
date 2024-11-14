@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  LogarithmicScale,
 } from "chart.js";
 
 ChartJS.register(
@@ -17,59 +18,66 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  LogarithmicScale
 );
-
-// Function to generate a random color
-const getRandomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
 
 function Ranching() {
   const [data, setData] = useState([]);
-  const [selectedMetric, setSelectedMetric] = useState("Base Price");
-  const [selectedProfession, setSelectedProfession] = useState("All");
+  const [selectedMetric, setSelectedMetric] = useState("Sell Price");
+  const [selectedSeasons, setSelectedSeasons] = useState([]);
+  const [scaleType, setScaleType] = useState("logarithmic"); // State to track scale type
+  const [isRancher, setIsRancher] = useState(false); // State to track if Rancher is selected
+  const [quality, setQuality] = useState("regular"); // State for quality selection
+
+  // Quality multipliers map
+  const qualityMultipliers = {
+    regular: 1,
+    silver: 1.25,
+    gold: 1.5,
+    iridium: 2,
+  };
 
   useEffect(() => {
     Papa.parse("/ranching.csv", {
       download: true,
       header: true,
       complete: (result) => {
-        console.log(result.data); // log parsed data
         setData(result.data);
       },
     });
   }, []);
 
-  // Define profession multipliers (example values)
-  const professionMultipliers = {
-    Rancher: 1.2,
-    Farmer: 1.1,
-    // Add more professions with their respective multipliers
+  const handleSeasonChange = (season) => {
+    setSelectedSeasons((prevSeasons) =>
+      prevSeasons.includes(season)
+        ? prevSeasons.filter((s) => s !== season)
+        : [...prevSeasons, season]
+    );
   };
 
-  // Filter data based on selected profession
-  const filteredData =
-    selectedProfession === "All"
-      ? data
-      : data.filter((entry) => entry.profession === selectedProfession);
+  const filteredData = data.filter((entry) => {
+    const entrySeasons = entry.Season.split(", ");
+    return (
+      selectedSeasons.length === 0 ||
+      selectedSeasons.some((season) => entrySeasons.includes(season))
+    );
+  });
 
   const chartData = {
-    labels: filteredData.map((entry) => entry.product),
+    labels: filteredData.map((entry) => entry.Product),
     datasets: [
       {
         label: selectedMetric,
         data: filteredData.map((entry) => {
-          const basePrice = parseInt(entry.base_price, 10);
-          const multiplier = professionMultipliers[entry.profession] || 1; // Default to 1 if no multiplier
-          return basePrice * multiplier; // Calculate effective price
+          let sellPrice = parseFloat(entry.SellPrice); // Base sell price
+          if (isRancher) {
+            sellPrice *= 1.2; // Apply 1.2 multiplier if Rancher is selected
+          }
+          sellPrice *= qualityMultipliers[quality]; // Apply quality multiplier
+          return Math.floor(sellPrice);
         }),
-        backgroundColor: filteredData.map(() => getRandomColor()),
+        backgroundColor: filteredData.map((entry) => entry.Color || "#808080"),
       },
     ],
   };
@@ -80,39 +88,97 @@ function Ranching() {
     scales: {
       x: {
         ticks: {
-          minRotation: 90, // Sets minimum rotation to 90 degrees
-          maxRotation: 90, // Sets maximum rotation to 90 degrees
-          align: "start", // Optionally aligns the text to the start of each tick
+          minRotation: 90,
+          maxRotation: 90,
+          align: "start",
         },
       },
       y: {
         beginAtZero: true,
+        type: scaleType, // Dynamically set the y-axis scale type
       },
     },
   };
 
   return (
     <div className="chart-container" style={{ height: "400px", width: "100%" }}>
-      <h2>Ranching Data - {selectedMetric}</h2>
-      <select
-        value={selectedProfession}
-        onChange={(e) => setSelectedProfession(e.target.value)}
-        style={{ marginBottom: "1rem" }}
-      >
-        <option value="All">All Professions</option>
-        <option value="Rancher">Rancher</option>
-        <option value="Farmer">Farmer</option>
-        {/* Add more professions as necessary */}
-      </select>
-      <select
-        value={selectedMetric}
-        onChange={(e) => setSelectedMetric(e.target.value)}
-        style={{ marginBottom: "1rem" }}
-      >
-        <option value="Base Price">Base Price</option>
-        <option value="Profession">Profession</option>
-        {/* Add more options for other metrics as necessary */}
-      </select>
+      <h2 style={{ color: "white" }}>Ranching Data - {selectedMetric}</h2>
+
+      <div style={{ color: "white", marginBottom: "1rem" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Spring")}
+            onChange={() => handleSeasonChange("Spring")}
+          />
+          Spring
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Summer")}
+            onChange={() => handleSeasonChange("Summer")}
+          />
+          Summer
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Fall")}
+            onChange={() => handleSeasonChange("Fall")}
+          />
+          Fall
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Winter")}
+            onChange={() => handleSeasonChange("Winter")}
+          />
+          Winter
+        </label>
+      </div>
+
+      {/* Rancher toggle checkbox */}
+      <div style={{ marginBottom: "1rem" }}>
+        <label style={{ color: "white", marginRight: "10px" }}>
+          Rancher Profession:
+        </label>
+        <input
+          type="checkbox"
+          checked={isRancher}
+          onChange={() => setIsRancher((prev) => !prev)} // Toggle Rancher profession
+        />
+      </div>
+
+      {/* Dropdown for selecting scale type */}
+      <div style={{ marginBottom: "1rem" }}>
+        <label style={{ color: "white", marginRight: "10px" }}>
+          Scale Type:{" "}
+        </label>
+        <select
+          value={scaleType}
+          onChange={(e) => setScaleType(e.target.value)} // Update scale type when changed
+        >
+          <option value="linear">Linear Scale</option>
+          <option value="logarithmic">Logarithmic Scale</option>
+        </select>
+      </div>
+
+      {/* Dropdown for selecting quality */}
+      <div style={{ marginBottom: "1rem" }}>
+        <label style={{ color: "white", marginRight: "10px" }}>Quality:</label>
+        <select
+          value={quality}
+          onChange={(e) => setQuality(e.target.value)} // Update quality when changed
+        >
+          <option value="regular">Regular</option>
+          <option value="silver">Silver</option>
+          <option value="gold">Gold</option>
+          <option value="iridium">Iridium</option>
+        </select>
+      </div>
+
       <Bar data={chartData} options={chartOptions} />
     </div>
   );

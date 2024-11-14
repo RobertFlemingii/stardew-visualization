@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  LogarithmicScale,
 } from "chart.js";
 
 ChartJS.register(
@@ -17,46 +18,42 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  LogarithmicScale
 );
-
-// Function to generate a random color
-const getRandomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
 
 function Tilling() {
   const [data, setData] = useState([]);
-  const [selectedMetric, setSelectedMetric] = useState("Base Price");
-  const [selectedProfession, setSelectedProfession] = useState("All");
+  const [selectedMetric, setSelectedMetric] = useState("Sell Price");
+  const [selectedSeasons, setSelectedSeasons] = useState([]);
+  const [scaleType, setScaleType] = useState("logarithmic"); // State to track scale type
+  const [isTiller, setIsTiller] = useState(false); // State to track if Tiller is selected
 
   useEffect(() => {
     Papa.parse("/tilling.csv", {
       download: true,
       header: true,
       complete: (result) => {
-        console.log(result.data); // log parsed data
         setData(result.data);
       },
     });
   }, []);
 
-  // Define profession multipliers (example values)
-  const professionMultipliers = {
-    Tiller: 1.2,
-    // Add more professions with their respective multipliers
+  const handleSeasonChange = (season) => {
+    setSelectedSeasons((prevSeasons) =>
+      prevSeasons.includes(season)
+        ? prevSeasons.filter((s) => s !== season)
+        : [...prevSeasons, season]
+    );
   };
 
-  // Filter data based on selected profession
-  const filteredData =
-    selectedProfession === "All"
-      ? data
-      : data.filter((entry) => entry.profession === selectedProfession);
+  const filteredData = data.filter((entry) => {
+    const entrySeasons = entry.Season.split(", ");
+    return (
+      selectedSeasons.length === 0 ||
+      selectedSeasons.some((season) => entrySeasons.includes(season))
+    );
+  });
 
   const chartData = {
     labels: filteredData.map((entry) => entry.Crop),
@@ -64,11 +61,13 @@ function Tilling() {
       {
         label: selectedMetric,
         data: filteredData.map((entry) => {
-          const basePrice = parseInt(entry.SellPrice, 10);
-          const multiplier = professionMultipliers[entry.profession] || 1; // Default to 1 if no multiplier
-          return basePrice * multiplier; // Calculate effective price
+          let sellPrice = parseFloat(entry.SellPrice); // Base sell price
+          if (isTiller) {
+            sellPrice *= 1.1; // Apply 1.1 multiplier if Tiller is selected
+          }
+          return Math.floor(sellPrice);
         }),
-        backgroundColor: filteredData.map(() => getRandomColor()),
+        backgroundColor: filteredData.map((entry) => entry.Color || "#808080"),
       },
     ],
   };
@@ -79,38 +78,83 @@ function Tilling() {
     scales: {
       x: {
         ticks: {
-          minRotation: 90, // Sets minimum rotation to 90 degrees
-          maxRotation: 90, // Sets maximum rotation to 90 degrees
-          align: "start", // Optionally aligns the text to the start of each tick
+          minRotation: 90,
+          maxRotation: 90,
+          align: "start",
         },
       },
       y: {
         beginAtZero: true,
+        type: scaleType, // Dynamically set the y-axis scale type
       },
     },
   };
 
   return (
     <div className="chart-container" style={{ height: "400px", width: "100%" }}>
-      <h2>Tilling Data - {selectedMetric}</h2>
-      <select
-        value={selectedProfession}
-        onChange={(e) => setSelectedProfession(e.target.value)}
-        style={{ marginBottom: "1rem" }}
-      >
-        <option value="All">All Professions</option>
-        <option value="Tiller">Tiller</option>
-        {/* Add more professions as necessary */}
-      </select>
-      <select
-        value={selectedMetric}
-        onChange={(e) => setSelectedMetric(e.target.value)}
-        style={{ marginBottom: "1rem" }}
-      >
-        <option value="Base Price">Base Price</option>
-        <option value="Profession">Profession</option>
-        {/* Add more options for other metrics as necessary */}
-      </select>
+      <h2 style={{ color: "white" }}>Tilling Data - {selectedMetric}</h2>
+
+      <div style={{ color: "white", marginBottom: "1rem" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Spring")}
+            onChange={() => handleSeasonChange("Spring")}
+          />
+          Spring
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Summer")}
+            onChange={() => handleSeasonChange("Summer")}
+          />
+          Summer
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Fall")}
+            onChange={() => handleSeasonChange("Fall")}
+          />
+          Fall
+        </label>
+        <label style={{ marginLeft: "10px" }}>
+          <input
+            type="checkbox"
+            checked={selectedSeasons.includes("Winter")}
+            onChange={() => handleSeasonChange("Winter")}
+          />
+          Winter
+        </label>
+      </div>
+
+      {/* Tiller toggle checkbox */}
+      <div style={{ marginBottom: "1rem" }}>
+        <label style={{ color: "white", marginRight: "10px" }}>
+          Tiller Profession:
+        </label>
+        <input
+          type="checkbox"
+          checked={isTiller}
+          onChange={() => setIsTiller((prev) => !prev)} // Toggle Tiller profession
+        />
+      </div>
+
+      {/* Dropdown for selecting scale type */}
+      <div style={{ marginBottom: "1rem" }}>
+        <label style={{ color: "white", marginRight: "10px" }}>
+          Scale Type:{" "}
+        </label>
+        <select
+          value={scaleType}
+          onChange={(e) => setScaleType(e.target.value)} // Update scale type when changed
+        >
+          <option value="linear">Linear Scale</option>
+          <option value="logarithmic">Logarithmic Scale</option>
+        </select>
+      </div>
+
       <Bar data={chartData} options={chartOptions} />
     </div>
   );

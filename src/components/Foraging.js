@@ -90,7 +90,7 @@ function Foraging() {
 
   return (
     <div className="chart-container" style={{ height: "400px", width: "100%" }}>
-      <h2>Foraging Data - {selectedMetric}</h2>
+      <h2 style={{ color: "white" }}>Foraging Data - {selectedMetric}</h2>
       <select
         value={selectedProfession}
         onChange={(e) => setSelectedProfession(e.target.value)}

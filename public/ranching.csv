@@ -1,26 +1,18 @@
-product,base_price,profession
-egg,50,Rancher
-large egg,95,Rancher
-brown egg,50,Rancher
-large brown egg,95,Rancher
-mayonnaise,190,Artisan
-void egg,65,Rancher
-void mayonnaise,275,Artisan
-golden egg,500,Rancher
-duck egg,95,Rancher
-duck feather,250,Rancher
-duck mayonnaise,375,Artisan
-wool,340,Rancher
-cloth,470,Artisan
-rabbit's foot,565,Rancher
-dinosaur egg,350,Rancher
-dinosaur mayonnaise,800,Artisan
-milk,125,Rancher
-large milk,190,Rancher
-cheese,230,Artisan
-goat milk,225,Rancher
-large goat milk,345,Rancher
-goat cheese,400,Artisan
-truffle,625,Rancher
-truffle oil,1065,Artisan
-ostrich egg,600,Rancher
+Product,SellPrice,Profession,Season,Color
+egg,50,Rancher,"Spring, Summer, Fall, Winter",#FFFFFF
+large egg,95,Rancher,"Spring, Summer, Fall, Winter",#FFFFFF
+brown egg,50,Rancher,"Spring, Summer, Fall, Winter",#FACA6E
+large brown egg,95,Rancher,"Spring, Summer, Fall, Winter",#FACA6E
+void egg,65,Rancher,"Spring, Summer, Fall, Winter",#FF3C0D
+golden egg,500,Rancher,"Spring, Summer, Fall, Winter",#FED224
+duck egg,95,Rancher,"Spring, Summer, Fall, Winter",#D8C76E
+duck feather,250,Rancher,"Spring, Summer, Fall, Winter",#5BFE15
+wool,340,Rancher,"Spring, Summer, Fall, Winter",#DFCCAA
+rabbit's foot,565,Rancher,"Spring, Summer, Fall, Winter",#FFFED3
+dinosaur egg,350,Rancher,"Spring, Summer, Fall, Winter",#998A1E
+milk,125,Rancher,"Spring, Summer, Fall, Winter",#D8AB48
+large milk,190,Rancher,"Spring, Summer, Fall, Winter",#D8AB48
+goat milk,225,Rancher,"Spring, Summer, Fall, Winter",#FEFFF8
+large goat milk,345,Rancher,"Spring, Summer, Fall, Winter",#FEFFF8
+truffle,625,Rancher,"Spring, Summer, Fall",#7E3208
+ostrich egg,600,Rancher,"Spring, Summer, Fall, Winter",#FFE3BF

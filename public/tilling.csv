@@ -1,54 +1,63 @@
-Crop,SeedPrice,SellPrice,Yield,GrowTime,RegrowTime,Harvests,Spring,Summer,Fall,Winter,Greenhouse,Year2
-Apricot,2000,50,3,1,1,28,1,0,0,0,1,0
-Blue Jazz,30,50,1,7,0,4,1,0,0,0,1,0
-Carrot,,35,1,3,0,9,1,0,0,0,1,0
-Cauliflower,80,175,1,12,0,2,1,0,0,0,1,0
-Cherry,3400,80,1,1,1,28,1,0,0,0,1,0
-Coffee Bean,2500,15,4,10,2,10,1,1,0,0,1,0
-Garlic,40,60,1,4,0,7,1,0,0,0,1,1
-Green Bean,60,40,1,10,3,7,1,0,0,0,1,0
-Kale,70,110,1,6,0,4,1,0,0,0,1,0
-Parsnip,20,35,1,4,0,7,1,0,0,0,1,0
-Potato,50,80,1,6,0,4,1,0,0,0,1,0
-Rhubarb,100,220,1,13,0,2,1,0,0,0,1,0
-Strawberry,100,120,1,8,4,6,1,0,0,0,1,0
-Tea Leaves,,50,1,20,1,9,1,1,1,0,1,0
-Tulip,20,30,1,6,0,4,1,0,0,0,1,0
-Unmilled Rice,40,30,1,6,0,4,1,0,0,0,1,0
-Banana,,150,1,1,1,28,0,1,0,0,1,0
-Blueberry,80,50,3,13,4,4,0,1,0,0,1,0
-Corn,150,50,1,14,4,4,0,1,1,0,1,0
-Hops,60,25,1,11,1,18,0,1,0,0,1,0
-Hot Pepper,40,40,1,5,3,8,0,1,0,0,1,0
-Mango,,130,1,1,1,28,0,1,0,0,1,0
-Melon,80,250,1,12,0,2,0,1,0,0,1,0
-Orange,4000,100,1,1,1,28,0,1,0,0,1,0
-Peach,6000,140,1,1,1,28,0,1,0,0,1,0
-Pineapple,,300,1,14,7,3,0,1,0,0,1,0
-Poppy,100,140,1,7,0,4,0,1,0,0,1,0
-Radish,40,90,1,6,0,4,0,1,0,0,1,0
-Red Cabbage,100,260,1,9,0,3,0,1,0,0,1,1
-Starfruit,400,750,1,13,0,2,0,1,0,0,1,0
-Summer Spangle,50,90,1,8,0,3,0,1,0,0,1,0
-Summer Squash,,45,1,6,3,8,0,1,0,0,1,0
-Sunflower,200,80,1,8,0,3,0,1,1,0,1,0
-Taro,,100,1,7,0,4,0,1,0,0,1,0
-Tomato,50,60,1,11,4,5,0,1,0,0,1,0
-Wheat,10,25,1,4,0,7,0,1,1,0,1,0
-Amaranth,70,150,1,7,0,4,0,0,1,0,1,0
-Apple,4000,100,1,1,1,28,0,0,1,0,1,0
-Artichoke,30,160,1,8,0,3,0,0,1,0,1,1
-Beet,20,100,1,6,0,4,0,0,1,0,1,0
-Bok Choy,50,80,1,4,0,7,0,0,1,0,1,0
-Broccoli,,70,1,8,4,6,0,0,1,0,1,0
-Cranberries,240,75,2,7,5,5,0,0,1,0,1,0
-Eggplant,20,60,1,5,5,5,0,0,1,0,1,0
-Fairy Rose,200,290,1,12,0,2,0,0,1,0,1,0
-Pumpkin,100,320,1,13,0,2,0,0,1,0,1,0
-Grape,60,80,1,10,3,7,0,0,1,0,1,0
-Pomegranate,6000,140,1,1,1,28,0,0,1,0,1,0
-Sweet Gem Berry,1000,3000,1,24,0,1,0,0,1,0,1,0
-Yam,60,160,1,10,0,2,0,0,1,0,1,0
-Powdermelon,,60,1,7,0,4,0,0,0,1,1,0
-Ancient Fruit,,550,1,28,7,1,1,1,1,0,1,0
-Cactus Fruit,150,75,1,12,3,6,0,0,0,0,1,0
+Crop,SeedPrice,SellPrice,Yield,GrowTime,RegrowTime,Harvests,Season,Greenhouse,Year2,Color
+Apricot,2000,50,3,1,1,28,Spring,1,0,#F3B227
+Blue Jazz,30,50,1,7,0,4,Spring,1,0,#7FCCF5
+Carrot,,35,1,3,0,9,Spring,1,0,#FEAE00
+Cauliflower,80,175,1,12,0,2,Spring,1,0,#FEFED1
+Cherry,3400,80,1,1,1,28,Spring,1,0,#C70909
+Coffee Bean,2500,15,4,10,2,10,"Spring, Summer",1,0,#FCDC53
+Garlic,40,60,1,4,0,7,Spring,1,1,#FFFFD6
+Green Bean,60,40,1,10,3,7,Spring,1,0,#A8FE8D
+Kale,70,110,1,6,0,4,Spring,1,0,#58DC60
+Parsnip,20,35,1,4,0,7,Spring,1,0,#FEFFC6
+Potato,50,80,1,6,0,4,Spring,1,0,#E68823
+Rhubarb,100,220,1,13,0,2,Spring,1,0,#F24B01
+Strawberry,100,120,1,8,4,6,Spring,1,0,#FEA588
+Tea Leaves,,50,1,20,1,9,"Spring, Summer, Fall",1,0,#84DE2E
+Tulip,20,30,1,6,0,4,Spring,1,0,#FE8E8F
+Unmilled Rice,40,30,1,6,0,4,Spring,1,0,#FCD000
+Salmonberry,,5,1,,,,Spring,,,#D90032
+Banana,,150,1,1,1,28,Summer,1,0,#F0FE01
+Blueberry,80,50,3,13,4,4,Summer,1,0,#0170FF
+Corn,150,50,1,14,4,4,"Summer, Fall",1,0,#FEFE14
+Hops,60,25,1,11,1,18,Summer,1,0,#0F6A15
+Hot Pepper,40,40,1,5,3,8,Summer,1,0,#FF3E15
+Mango,,130,1,1,1,28,Summer,1,0,#ED5316
+Melon,80,250,1,12,0,2,Summer,1,0,#E54260
+Orange,4000,100,1,1,1,28,Summer,1,0,#DF5E00
+Peach,6000,140,1,1,1,28,Summer,1,0,#FF9C9B
+Pineapple,,300,1,14,7,3,Summer,1,0,#BA930C
+Poppy,100,140,1,7,0,4,Summer,1,0,#FEA500
+Radish,40,90,1,6,0,4,Summer,1,0,#F64140
+Red Cabbage,100,260,1,9,0,3,Summer,1,1,#DA3295
+Starfruit,400,750,1,13,0,2,Summer,1,0,#FFFE01
+Summer Spangle,50,90,1,8,0,3,Summer,1,0,#FEFF98
+Summer Squash,,45,1,6,3,8,Summer,1,0,#FCD82A
+Sunflower,200,80,1,8,0,3,"Summer, Fall",1,0,#FFFE01
+Taro,,100,1,7,0,4,Summer,1,0,#7B3E17
+Tomato,50,60,1,11,4,5,Summer,1,0,#FF3E15
+Wheat,10,25,1,4,0,7,"Summer, Fall",1,0,#FEFE14
+Fiddlehead Fern,,90,1,,,,Summer,,,#47D001
+Sweet Pea,,50,1,,,,Summer,,,#D100C5
+Spice Berry,,80,1,,,,Summer,,,#CF6001
+Amaranth,70,150,1,7,0,4,Fall,1,0,#E285D8
+Apple,4000,100,1,1,1,28,Fall,1,0,#BF0000
+Artichoke,30,160,1,8,0,3,Fall,1,1,#4CDD01
+Beet,20,100,1,6,0,4,Fall,1,0,#AF0100
+Bok Choy,50,80,1,4,0,7,Fall,1,0,#E2FECC
+Broccoli,,70,1,8,4,6,Fall,1,0,#33BC02
+Cranberries,240,75,2,7,5,5,Fall,1,0,#FF3E15
+Eggplant,20,60,1,5,5,5,Fall,1,0,#A38AE4
+Fairy Rose,200,290,1,12,0,2,Fall,1,0,#F6BBFE
+Pumpkin,100,320,1,13,0,2,Fall,1,0,#FEAE01
+Grape,60,80,1,10,3,7,Fall,1,0,#C56DCA
+Pomegranate,6000,140,1,1,1,28,Fall,1,0,#D2016D
+Sweet Gem Berry,1000,3000,1,24,0,1,Fall,1,0,#D96011
+Yam,60,160,1,10,0,2,Fall,1,0,#FF9905
+Blackberry,,20,1,,,,Fall,,,#366c99
+Wild Plum,,80,1,,,,Fall,,,#871878
+Powdermelon,,60,1,7,0,4,Winter,1,0,#FFFFFF
+Crocus,,60,1,,,,Winter,,,#3B008E
+Crystal Fruit,,150,1,,,,Winter,,,#0E8DFF
+Ancient Fruit,,550,1,28,7,1,"Spring, Summer, Fall",1,0,#D9FFFF
+Cactus Fruit,150,75,1,12,3,6,,1,0,#A6FE6D
+Coconut,,100,1,,,,"Spring, Summer, Fall, Winter",,,#7F4019

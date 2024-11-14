@@ -1,6 +1,80 @@
-.chart-container {
+/* App.css */
+
+/* Global background image for the body */
+body {
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  margin: 0;
+  height: 100vh; /* Ensures the body takes full viewport height */
+}
+
+/* The darkness container */
+.darkness {
+  position: fixed; /* Fix it to cover the entire screen */
+  top: 0; /* Start from the top */
+  left: 0; /* Start from the left */
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent dark background */
+  z-index: 999; /* Ensure it is on top of all other elements */
+  display: none; /* Initially hide it, can be toggled with JS */
+}
+
+/* Content wrapper that holds all the content inside */
+.content-container {
+  background-color: rgba(0, 0, 0, 0.75); /* Dark, semi-transparent background */
+  padding: 20px;
+  border-radius: 8px;
   position: relative;
-  width: 90%; /* Limit the width to 90% of the container */
-  height: 500px; /* Set a fixed height */
-  margin: 0 auto; /* Center the chart horizontally */
+  z-index: 2;
+  max-width: 1200px;
+  margin: 20px auto;
+  flex: 1; /* Ensures it stretches to take up remaining space */
+}
+
+/* Style for the navigation buttons */
+.nav-button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue background color */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.nav-button:active {
+  transform: translateY(2px);
+}
+
+.nav-button:focus {
+  outline: none;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .nav-button {
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+  }
 }
