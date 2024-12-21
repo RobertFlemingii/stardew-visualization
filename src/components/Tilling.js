@@ -24,7 +24,7 @@ ChartJS.register(
 
 function Tilling() {
   const [data, setData] = useState([]);
-  const [selectedMetric, setSelectedMetric] = useState("Sell Price");
+  const [selectedMetric] = useState("Sell Price");
   const [selectedSeasons, setSelectedSeasons] = useState([]);
   const [scaleType, setScaleType] = useState("logarithmic"); // State to track scale type
   const [isTiller, setIsTiller] = useState(false); // State to track if Tiller is selected

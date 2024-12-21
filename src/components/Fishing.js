@@ -24,7 +24,7 @@ ChartJS.register(
 
 function Fishing() {
   const [data, setData] = useState([]);
-  const [selectedMetric, setSelectedMetric] = useState("Sell Price");
+  const [selectedMetric] = useState("Sell Price");
   const [quality, setQuality] = useState("regular"); // State for quality selection
   const [profession, setProfession] = useState("none"); // State for selected profession
   const [selectedLocations, setSelectedLocations] = useState([]);
